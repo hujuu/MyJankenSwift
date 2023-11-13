@@ -12,31 +12,45 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            Spacer()
             if jankenNumber == 0 {
                 Text("これから")
-                
+                    .padding(.bottom)
             } else if jankenNumber == 1 {
                 Image(.gu)
                     .resizable()
                     .scaledToFit()
-                Text("グー")
+                Spacer()
+                Text("グー").padding(.bottom)
             } else if jankenNumber == 2 {
                 Image(.choki)
                     .resizable()
                     .scaledToFit()
-                Text("チョキ")
+                Spacer()
+                Text("チョキ").padding(.bottom)
             } else {
                 Image(.pa)
                     .resizable()
                     .scaledToFit()
-                Text("パー")
+                Spacer()
+                Text("パー").padding(.bottom)
             }
             
             Button(action: {
-                print("タップされたよ！")
-                jankenNumber = Int.random(in: 1...3)
+                var newJankenNumber = 0
+                
+                repeat{
+                    newJankenNumber = Int.random(in: 1...3)
+                } while jankenNumber == newJankenNumber
+                
+                jankenNumber = newJankenNumber
             }, label: {
                 Text("じゃんけんをする！")
+                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                    .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .background(.pink)
+                    .foregroundColor(.white)
             })
         }
     }
